@@ -1,0 +1,51 @@
+<div class="category_index">
+	<h2>カテゴリー追加</h2>
+	<%= form_for @food_category, url: food_categories_path do |f| %>
+
+		<div class="form-group">
+			<div>
+			<%= f.label :food_category_name, 'メニューカテゴリー名' %>
+			</div>
+			<div>
+				<%= f.text_field :food_category_name, class: "form-control" %>
+			</div>
+		</div>
+		<div class=""></div>
+		<div class="form-group">
+			<div class="form-inline">
+			<%= f.label :有効　%>
+			<%= f.radio_button :food_active_status , :有効 %>
+			<%= f.label :無効　%>
+			<%= f.radio_button :food_active_status , :無効 %>
+		</div>
+        </div>
+    	<%= f.submit "追加する", class: "btn btn-md btn-primary" %>
+    <% end %>
+	<h2>カテゴリー 一覧・編集</h2>
+    <table class = "table">
+		<thead>
+			<tr class="active">
+				<th>カテゴリー</th>
+				<th>状態</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<% @food_categories.each do |food_category| %>
+			<%= form_for food_category, url: food_category_path(food_category), method: :patch do |f| %>
+				<tr>
+					<td><%= f.text_field :food_category_name, class: "form-control" %></td>
+					<td>
+						<%= f.label :food_active_status, '有効' %>
+						<%= f.radio_button :food_active_status , :有効 %>
+					</td>
+					<td>
+						<%= f.label :food_active_status, '無効' %>
+						<%= f.radio_button :food_active_status , :無効 %>
+					</td>
+					<td><%= f.submit "編集する", class: "btn btn-md btn-primary" %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+</div>

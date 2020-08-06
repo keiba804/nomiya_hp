@@ -1,0 +1,53 @@
+<div class="menu_index">
+  <div class="row">
+    <div class="col-xs-9">
+      <h2> メニュー</h2>
+      <h4>カテゴリー 一覧</h4>
+
+      <% @food_categories.each do |food_category| %>
+      <div>
+        <h4 style="text-align:center" id ="{food_category.id}"><%= food_category.food_category_name %></h4>
+          <table class="table" frame="box">
+            <thead>
+              <tr>
+                <th class="col-xs-2">メニュー名</th>
+                <th>価格（税抜）</th>
+                <th class="col-xs-3">説明</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% food_category.foods.each do |food| %>
+                <tr>
+                  <td>
+                    <%= food.food_name %>
+                  </td>
+                  <td>
+                    <%= food.price %>円
+                  </td>
+                  <td>
+                    <%= food.explanation %>
+                  </td>
+                  <td>
+                    <%= food.sales_status %>
+                  </td>
+                  <td><%= link_to '編集', '#', class: "btn btn-md btn-primary" %></td>
+                  <td><%= link_to '削除', '#', method: :delete, data: { confirm: '本当に削除しますか?' }, class: "btn btn-md btn-danger" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+
+      <br>
+
+      <%= link_to '新しいメニューを投稿する', '#' %>
+
+      </div>
+    </div>
+  </div>
+</div>
