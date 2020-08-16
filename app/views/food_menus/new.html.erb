@@ -1,0 +1,52 @@
+<div class="col-xs-12">
+  <div class="row">
+    <div class="col-xs-3 side-ber">
+    	<%= render 'admin/restaurants/admin_sideber' %>
+    </div>
+    <div class="col-xs-5">
+		<h3>新規メニュー 登録フォーム</h3>
+		<%= form_for @food, url: admin_foods_path, local: true do |form| %>
+		  <% if @food.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+
+		      <ul>
+		      <% @food.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <div class="form-group">
+		    <%= form.label :food_category, 'フードカテゴリー' %>
+		    <%= form.collection_select :food_category_id, current_restaurant.food_categories, :id, :food_category_name, {include_blank: "選択してください"}, class: "form-control" %>
+		  </div>
+
+
+		  <div class="form-group">
+		    <%= form.label :name, 'メニュー名' %>
+		    <%= form.text_field :food_name, class: "form-control" %>
+		  </div>
+
+
+		  <div class="form-group">
+		    <%= form.label :explanation, '商品説明' %>
+		    <%= form.text_field :explanation, class: "form-control" %>
+		  </div>
+
+		  <div class="form-group">
+		    <%= form.label :price, '価格（税抜）' %>
+		    <%= form.text_field :price, class: "form-control" %>
+		  </div>
+
+		  <div class="actions">
+		    <%= form.submit "作成", class: "btn btn-md btn-primary form-control" %>
+		  </div>
+		<% end %>
+
+		<%= link_to '一覧へ', '#' %>
+
+    </div>
+  </div>
+</div>
